@@ -3,15 +3,6 @@ import catchAsync from '../../../shared/catchAsync';
 import sendResponse from '../../../shared/sendResponse';
 import { UserService } from './user.service';
 
-const signupUser = catchAsync(async (req, res) => {
-  const result = await UserService.signupUser(req.body);
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: 'The newly created user object.',
-    data: result,
-  });
-});
 const getAllUser = catchAsync(async (req, res) => {
   const result = await UserService.getAllUser();
   sendResponse(res, {
@@ -50,7 +41,6 @@ const deleteUser = catchAsync(async (req, res) => {
 });
 
 export const UserController = {
-  signupUser,
   getAllUser,
   getSingleUser,
   updateUser,
