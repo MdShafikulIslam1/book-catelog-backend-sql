@@ -1,15 +1,24 @@
-/*
-  Warnings:
-
-  - Added the required column `updatedAt` to the `users` table without a default value. This is not possible if the table is not empty.
-
-*/
 -- CreateEnum
-CREATE TYPE "OrderStatus" AS ENUM ('PENDING', 'SHIPPED', 'DELIVERED');
+CREATE TYPE "OrderStatus" AS ENUM ('pending', 'shipped', 'delivered');
 
--- AlterTable
-ALTER TABLE "users" ADD COLUMN     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-ADD COLUMN     "updatedAt" TIMESTAMP(3) NOT NULL;
+-- CreateEnum
+CREATE TYPE "UserRole" AS ENUM ('customer', 'admin');
+
+-- CreateTable
+CREATE TABLE "users" (
+    "id" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
+    "role" "UserRole" NOT NULL,
+    "contactNo" TEXT NOT NULL,
+    "address" TEXT NOT NULL,
+    "profileImg" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "users_pkey" PRIMARY KEY ("id")
+);
 
 -- CreateTable
 CREATE TABLE "categories" (
@@ -53,7 +62,7 @@ CREATE TABLE "reviewAndRatings" (
 CREATE TABLE "Order" (
     "id" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
-    "status" "OrderStatus" DEFAULT 'PENDING',
+    "status" "OrderStatus" DEFAULT 'pending',
     "orderedBookId" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,

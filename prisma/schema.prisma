@@ -73,7 +73,7 @@ model Order {
   id            String       @id @default(uuid())
   userId        String
   user          User         @relation(fields: [userId], references: [id])
-  status        OrderStatus? @default(PENDING)
+  status        OrderStatus? @default(pending)
   orderedBookId String
   orderedBook   OrderedBook  @relation(fields: [orderedBookId], references: [id])
   createdAt     DateTime     @default(now())
@@ -91,12 +91,12 @@ model OrderedBook {
 }
 
 enum OrderStatus {
-  PENDING
-  SHIPPED
-  DELIVERED
+  pending
+  shipped
+  delivered
 }
 
 enum UserRole {
-  CUSTOMER
-  ADMIN
+  customer
+  admin
 }

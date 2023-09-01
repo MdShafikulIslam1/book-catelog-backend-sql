@@ -4,16 +4,15 @@ import config from '../../config';
 import { IGenericErrorMessages } from '../../interfaces/error';
 import handleValidationError from '../../error/handleValidationError';
 import ApiError from '../../error/ApiError';
-import { errorLogger } from '../../shared/logger';
 import { ZodError } from 'zod';
 import handleZodError from '../../error/handleZodError';
 import handleCastError from '../../error/handleCastError';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
 const globalErrorHandler: ErrorRequestHandler = (error, req, res, _next) => {
-  config.env === 'development'
-    ? // eslint-disable-next-line no-console
-      console.log('globalErrorhandler', error)
-    : errorLogger.error('global error ', error);
+  // config.env === 'development'
+  //   ? // eslint-disable-next-line no-console
+  //     console.log('globalErrorhandler', error)
+  //   : errorLogger.error('global error ', error);
   let statusCode = 500;
   let message = 'Something went wrong';
   let errorMessages: IGenericErrorMessages[] = [];
