@@ -12,7 +12,7 @@ const createOrder = catchAsync(async (req, res) => {
   });
 });
 const getAllOrder = catchAsync(async (req, res) => {
-  const result = await OrderService.getAllOrder();
+  const result = await OrderService.getAllOrder(req?.user);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
