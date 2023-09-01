@@ -5,6 +5,7 @@ import ApiError from '../../../error/ApiError';
 import httpStatus from 'http-status';
 import { JwtHelpers } from '../../../helpers/jwtHelpes';
 import config from '../../../config';
+import { Secret } from 'jsonwebtoken';
 
 const signupUser = async (data: User): Promise<User> => {
   const result = await prisma.user.create({
@@ -29,7 +30,7 @@ const signinUser = async (
   }
   const token = JwtHelpers.createToken(
     { userId: isExistUser.id, role: isExistUser.role },
-    config.secret as string,
+    config.secret as Secret,
     config.secret_expires_in as string
   );
   return { token };

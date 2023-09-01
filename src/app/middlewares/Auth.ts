@@ -15,7 +15,7 @@ const Auth =
       }
       const verifiedToken = JwtHelpers.verifyToken(
         token,
-        config.jwt.secret_key as Secret
+        config.secret as Secret
       );
       if (!verifiedToken) {
         throw new ApiError(httpStatus.UNAUTHORIZED, 'Unauthorized User');
