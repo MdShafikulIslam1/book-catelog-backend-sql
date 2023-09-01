@@ -1,4 +1,5 @@
 import { IGenericErrorMessages } from './error';
+
 export type IGenericResponse<T> = {
   meta: {
     page?: number;
@@ -12,4 +13,14 @@ export type IGenericErrorResponse = {
   statusCode: number;
   message: string;
   errorMessages: IGenericErrorMessages[];
+};
+
+export type IGenericResponseWithTotalPage<T> = {
+  meta?: {
+    page?: number;
+    limit?: number;
+    total?: number;
+    totalPage?: number;
+  };
+  data: T;
 };
