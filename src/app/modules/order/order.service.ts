@@ -29,7 +29,18 @@ const getAllOrder = async (user: JwtPayload | null) => {
   });
   return result;
 };
+
+const getSingleOrder = async (userId: string, orderId: string) => {
+  const result = await prisma.order.findUnique({
+    where: {
+      id: orderId,
+      userId,
+    },
+  });
+  return result;
+};
 export const OrderService = {
   createOrder,
   getAllOrder,
+  getSingleOrder,
 };
