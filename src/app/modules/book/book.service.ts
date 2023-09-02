@@ -64,13 +64,13 @@ const getAllBook = async (
         } else if (key === 'minPrice') {
           return {
             price: {
-              lte: parseFloat(filtersData.minPrice as string),
+              gte: parseFloat(filtersData.minPrice as string),
             },
           };
         } else if (key === 'maxPrice') {
           return {
             price: {
-              gte: parseFloat(filtersData.maxPrice as string),
+              lte: parseFloat(filtersData.maxPrice as string),
             },
           };
         } else {
