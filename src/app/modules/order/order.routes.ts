@@ -8,7 +8,6 @@ router.post(
   Auth(ENUM_USER_ROLE.CUSTOMER),
   OrderController.createOrder
 );
-// router.get('/', OrderController.getAllOrder);
 router.get(
   '/',
   Auth(ENUM_USER_ROLE.CUSTOMER, ENUM_USER_ROLE.ADMIN),
