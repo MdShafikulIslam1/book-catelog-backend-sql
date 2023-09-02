@@ -1,10 +1,10 @@
 import express from 'express';
 import { UserController } from './user.controller';
+import Auth from '../../middlewares/Auth';
+import { ENUM_USER_ROLE } from '../../../enum/user';
 const router = express.Router();
-//TODO:Role based routing system
-//All route are protected by ADMIN
-router.get('/', UserController.getAllUser);
-router.get('/:id', UserController.getSingleUser);
-router.patch('/:id', UserController.updateUser);
-router.delete('/:id', UserController.deleteUser);
+router.get('/', Auth(ENUM_USER_ROLE.ADMIN), UserController.getAllUser);
+router.get('/:id', Auth(ENUM_USER_ROLE.ADMIN), UserController.getSingleUser);
+router.patch('/:id', Auth(ENUM_USER_ROLE.ADMIN), UserController.updateUser);
+router.delete('/:id', Auth(ENUM_USER_ROLE.ADMIN), UserController.deleteUser);
 export const UserRoutes = router;

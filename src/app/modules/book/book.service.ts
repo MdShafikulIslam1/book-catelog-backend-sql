@@ -4,7 +4,11 @@ import prisma from '../../../shared/prisma';
 import { IPaginationOptions } from '../../../interfaces/paginationOptions';
 import { IBookFilterableFields } from './book.interface';
 import { paginationHelpers } from '../../../helpers/paginationHelpers';
-import { bookSearchableFields } from './book.constant';
+import {
+  bookSearchableFields,
+  bookFilterableRelationalFields,
+  bookFilterableRelationalFieldsMapper,
+} from './book.constant';
 import {
   IGenericResponse,
   IGenericResponseWithTotalPage,
@@ -26,7 +30,6 @@ const getAllBook = async (
   paginationOptions: IPaginationOptions
 ): Promise<IGenericResponse<Book[] | null>> => {
   const { search, ...filtersData } = filters;
-
   const { page, limit, sortBy, sortOrder, skip } =
     paginationHelpers.calculatePagination(paginationOptions);
   //sorting
@@ -50,39 +53,79 @@ const getAllBook = async (
   }
   //filtering
   // if (Object.keys(filtersData).length > 0) {
-  //   // andCondition.push({
-  //   //   AND: Object.keys(filtersData).map(key => ({
-  //   //     [key]: {
-  //   //       equals: (filtersData as any)[key],
-  //   //     },
-  //   //   })),
-  //   // });
-  //   const filterKeys = Object.keys(filtersData) as (keyof typeof filtersData)[];
-  //   filterKeys.forEach(key => {
-  //     if (filtersData[key]) {
-  //       const filter: Record<string, any> = {};
-  //       filter[key] = { equals: filtersData[key] };
-  //       andCondition.push(filter);
-  //     }
+  //   andCondition.push({
+  //     AND: Object.keys(filtersData).map(key => {
+  //       if (bookFilterableRelationalFields.includes(key)) {
+  //         return {
+  //           [bookFilterableRelationalFieldsMapper[key]]: {
+  //             id: (filtersData as any)[key],
+  //           },
+  //         };
+  //       } else if (key === 'maxPrice' || key === 'maxPrice') {
+  //         return {
+  //           minPrice: {
+  //             lte: filtersData.minPrice,
+  //           },
+  //           maxPrice: {
+  //             gte: filtersData.maxPrice,
+  //           },
+  //         };
+  //       } else {
+  //         return {
+  //           [key]: {
+  //             equals: (filtersData as any)[key],
+  //           },
+  //         };
+  //       }
+  //     }),
   //   });
   // }
+
+  // Remove the declaration of whereCondition as an array
+  const whereCondition: Prisma.BookWhereInput = {};
+
+  // ... your other code ...
+
   if (Object.keys(filtersData).length > 0) {
     andCondition.push({
-      AND: Object.keys(filtersData).map(key => ({
-        [key]: {
-          equals: (filtersData as any)[key],
-        },
-      })),
+      AND: Object.keys(filtersData).map(key => {
+        if (bookFilterableRelationalFields.includes(key)) {
+          return {
+            [bookFilterableRelationalFieldsMapper[key]]: {
+              id: (filtersData as any)[key],
+            },
+          };
+        } else if (key === 'minPrice') {
+          return {
+            minPrice: {
+              lte: filtersData.minPrice,
+            },
+          };
+        } else if (key === 'maxPrice') {
+          return {
+            maxPrice: {
+              gte: filtersData.maxPrice,
+            },
+          };
+        } else {
+          return {
+            [key]: {
+              equals: (filtersData as any)[key],
+            },
+          };
+        }
+      }),
     });
   }
-  const whereCondition: Prisma.BookWhereInput =
-    andCondition.length > 0 ? { AND: andCondition } : {};
+
+  // const whereCondition: Prisma.BookWhereInput[] =
+  //   andCondition.length > 0 ? { AND: andCondition } : {};
 
   const result = await prisma.book.findMany({
     where: whereCondition,
-    // orderBy,
-    // skip,
-    // take: limit,
+    orderBy,
+    skip,
+    take: limit,
   });
   const total = await prisma.book.count({ where: whereCondition });
   return {
