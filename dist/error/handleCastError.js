@@ -1,8 +1,8 @@
+"use strict";
 // import mongoose from 'mongoose';
 // import { IGenericErrorMessages } from '../interfaces/error';
 // import { IGenericErrorResponse } from '../interfaces/common';
 // import httpStatus from 'http-status';
-
 // const handleCastError = (
 //   error: mongoose.Error.CastError
 // ): IGenericErrorResponse => {

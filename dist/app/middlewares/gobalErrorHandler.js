@@ -1,3 +1,4 @@
+"use strict";
 // /* eslint-disable no-unused-expressions */
 // import { ErrorRequestHandler } from 'express';
 // import config from '../../config';
@@ -16,7 +17,6 @@
 //   let statusCode = 500;
 //   let message = 'Something went wrong';
 //   let errorMessages: IGenericErrorMessages[] = [];
-
 //   if (error?.name === 'ValidationError') {
 //     const simplifiedError = handleValidationError(error);
 //     statusCode = simplifiedError.statusCode;
@@ -44,7 +44,6 @@
 //       ? [{ path: '', message: error?.message }]
 //       : [];
 //   }
-
 //   res.status(statusCode).json({
 //     success: false,
 //     message,

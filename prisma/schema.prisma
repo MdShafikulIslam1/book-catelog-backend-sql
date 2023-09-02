@@ -80,17 +80,6 @@ model Order {
   @@map("orders")
 }
 
-// model OrderedBook {
-//   id       String @id @default(uuid())
-//   bookId   String
-//   book     Book   @relation(fields: [bookId], references: [id])
-//   quantity Int
-//   orderId  String
-//   order    Order  @relation(fields: [orderId], references: [id])
-
-//   @@map("orderedBooks")
-// }
-
 enum OrderStatus {
   pending
   shipped

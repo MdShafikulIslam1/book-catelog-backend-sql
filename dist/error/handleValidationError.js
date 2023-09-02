@@ -1,7 +1,7 @@
+"use strict";
 // import mongoose, { Error } from 'mongoose';
 // import { IGenericErrorResponse } from '../interfaces/common';
 // import { IGenericErrorMessages } from '../interfaces/error';
-
 // const handleValidationError = (
 //   err: mongoose.Error.ValidationError
 // ): IGenericErrorResponse => {
@@ -13,12 +13,10 @@
 //       };
 //     }
 //   );
-
 //   return {
 //     statusCode: 500,
 //     message: 'ValidationError',
 //     errorMessages: errors,
 //   };
 // };
-
 // export default handleValidationError;
