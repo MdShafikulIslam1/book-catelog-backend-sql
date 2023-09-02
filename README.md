@@ -6,6 +6,13 @@
 
 This project has made for management books including read,write and order.Here user have two role ,one is customer who can read any book based on category and see all book,can create an order;another role is admin who can perform major task in this project.He can create book,update,also manage any user(customer)
 
+## Technology Stack:
+
+- Use TypeScript as the Programming Language.
+- Use Express.js as the web framework.
+- Use Prisma as the Object Relational Model (ORM)
+- Use postgreSQL as the database
+
 ### User(customer,admin):
 
 - signup with giving his/her some basic information
@@ -74,3 +81,5 @@ This project has made for management books including read,write and order.Here u
 - api/v1/orders/create-order (POST)
 - api/v1/orders (GET)
 - api/v1/orders/:orderId (GET)
+
+## [Api Documentation](https://documenter.getpostman.com/view/26339421/2s9Y5ctzu6)
