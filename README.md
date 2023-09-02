@@ -8,22 +8,37 @@ This project has made for management books including read,write and order.Here u
 
 ### User(customer,admin):
 
-- can signup with giving his/her some basic information
-- can signin with email and password
+- signup with giving his/her some basic information
+- signin with email and password
+- get profile data
 
 ### Customer:
 
-- can get all categories
-- can get a specific category
+- get all categories
+- get a specific category
+- get all book
+- get Books By CategoryId
+- get single book
+- create order
+- get all order for specific customer
+- get single order for specific customer
 
 ### Admin:
 
-- can see all users
-- can get a single user
-- can update user
-- can delete user
-- can create category for book
-- can get all categories
-- can get a specific category
-- can update category
-- can delete category
+- see all users
+- get a single user
+- update user
+- delete user
+- create category for book
+- get all categories
+- get a specific category
+- update category
+- delete category
+- create book
+- get all book
+- get Books By CategoryId
+- get single book
+- update book
+- delete book
+- get all orders
+- get single order for specific admin
