@@ -1,13 +1,12 @@
 import express from 'express';
 import { BookController } from './book.controller';
+import { ENUM_USER_ROLE } from '../../../enum/user';
+import Auth from '../../middlewares/Auth';
 const router = express.Router();
-//TODO:Role based routing system
-//create-Book route,update route,delete route are protected by ADMIN
-
-router.post('/create-book', BookController.create);
+router.post('/create-book', Auth(ENUM_USER_ROLE.ADMIN), BookController.create);
 router.get('/', BookController.getAllBook);
 router.get('/:id', BookController.getSingleBook);
 router.get('/:categoryId/category', BookController.getBookByCategoryId);
-router.patch('/:id', BookController.updateBook);
-router.delete('/:id', BookController.deleteBook);
+router.patch('/:id', Auth(ENUM_USER_ROLE.ADMIN), BookController.updateBook);
+router.delete('/:id', Auth(ENUM_USER_ROLE.ADMIN), BookController.deleteBook);
 export const BookRoutes = router;

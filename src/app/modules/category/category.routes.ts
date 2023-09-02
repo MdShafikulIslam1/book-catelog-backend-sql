@@ -3,8 +3,6 @@ import { CategoryController } from './category.controller';
 import Auth from '../../middlewares/Auth';
 import { ENUM_USER_ROLE } from '../../../enum/user';
 const router = express.Router();
-//TODO:Role based routing system
-//create-category route,update route,delete route are protected by ADMIN
 router.post(
   '/create-category',
   Auth(ENUM_USER_ROLE.ADMIN),
