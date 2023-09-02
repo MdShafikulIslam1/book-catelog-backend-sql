@@ -13,6 +13,8 @@ This project has made for management books including read,write and order.Here u
 - Use Prisma as the Object Relational Model (ORM)
 - Use postgreSQL as the database
 
+## Features
+
 ### User(customer,admin):
 
 - signup with giving his/her some basic information
