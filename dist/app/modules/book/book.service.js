@@ -48,7 +48,7 @@ const getAllBook = (filters, paginationOptions) => __awaiter(void 0, void 0, voi
         };
     }
     const andCondition = [];
-    //searching
+    // searching
     if (search) {
         andCondition.push({
             OR: book_constant_1.bookSearchableFields.map(filed => ({
@@ -59,38 +59,6 @@ const getAllBook = (filters, paginationOptions) => __awaiter(void 0, void 0, voi
             })),
         });
     }
-    //filtering
-    // if (Object.keys(filtersData).length > 0) {
-    //   andCondition.push({
-    //     AND: Object.keys(filtersData).map(key => {
-    //       if (bookFilterableRelationalFields.includes(key)) {
-    //         return {
-    //           [bookFilterableRelationalFieldsMapper[key]]: {
-    //             id: (filtersData as any)[key],
-    //           },
-    //         };
-    //       } else if (key === 'maxPrice' || key === 'maxPrice') {
-    //         return {
-    //           minPrice: {
-    //             lte: filtersData.minPrice,
-    //           },
-    //           maxPrice: {
-    //             gte: filtersData.maxPrice,
-    //           },
-    //         };
-    //       } else {
-    //         return {
-    //           [key]: {
-    //             equals: (filtersData as any)[key],
-    //           },
-    //         };
-    //       }
-    //     }),
-    //   });
-    // }
-    // Remove the declaration of whereCondition as an array
-    const whereCondition = {};
-    // ... your other code ...
     if (Object.keys(filtersData).length > 0) {
         andCondition.push({
             AND: Object.keys(filtersData).map(key => {
@@ -103,15 +71,15 @@ const getAllBook = (filters, paginationOptions) => __awaiter(void 0, void 0, voi
                 }
                 else if (key === 'minPrice') {
                     return {
-                        minPrice: {
-                            lte: filtersData.minPrice,
+                        price: {
+                            lte: parseFloat(filtersData.minPrice),
                         },
                     };
                 }
                 else if (key === 'maxPrice') {
                     return {
-                        maxPrice: {
-                            gte: filtersData.maxPrice,
+                        price: {
+                            gte: parseFloat(filtersData.maxPrice),
                         },
                     };
                 }
@@ -125,8 +93,7 @@ const getAllBook = (filters, paginationOptions) => __awaiter(void 0, void 0, voi
             }),
         });
     }
-    // const whereCondition: Prisma.BookWhereInput[] =
-    //   andCondition.length > 0 ? { AND: andCondition } : {};
+    const whereCondition = (andCondition.length > 0 ? { AND: andCondition } : {});
     const result = yield prisma_1.default.book.findMany({
         where: whereCondition,
         orderBy,
