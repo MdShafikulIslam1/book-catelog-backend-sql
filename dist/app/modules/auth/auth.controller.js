@@ -26,15 +26,20 @@ const signupUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, voi
         data: result,
     });
 }));
-const signinUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield auth_service_1.AuthService.signinUser(req.body);
-    (0, sendResponse_1.default)(res, {
-        statusCode: http_status_1.default.OK,
-        success: true,
-        message: 'successfully Login',
-        data: result,
-    });
-}));
+const signinUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const result = yield auth_service_1.AuthService.signinUser(req.body);
+        res.json({
+            success: true,
+            statusCode: http_status_1.default.OK,
+            message: 'User signin successfully!',
+            token: result === null || result === void 0 ? void 0 : result.token,
+        });
+    }
+    catch (error) {
+        next(error);
+    }
+});
 exports.AuthController = {
     signupUser,
     signinUser,

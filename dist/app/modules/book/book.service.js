@@ -72,14 +72,14 @@ const getAllBook = (filters, paginationOptions) => __awaiter(void 0, void 0, voi
                 else if (key === 'minPrice') {
                     return {
                         price: {
-                            lte: parseFloat(filtersData.minPrice),
+                            gte: parseFloat(filtersData.minPrice),
                         },
                     };
                 }
                 else if (key === 'maxPrice') {
                     return {
                         price: {
-                            gte: parseFloat(filtersData.maxPrice),
+                            lte: parseFloat(filtersData.maxPrice),
                         },
                     };
                 }

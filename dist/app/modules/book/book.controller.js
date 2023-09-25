@@ -74,7 +74,7 @@ const getBookByCategoryId = (0, catchAsync_1.default)((req, res) => __awaiter(vo
     (0, sendResponse_1.default)(res, {
         statusCode: http_status_1.default.OK,
         success: true,
-        message: 'Successfully Delete Single Book data',
+        message: 'Successfully Retrieve Single Book data using category id',
         data: result,
     });
 }));

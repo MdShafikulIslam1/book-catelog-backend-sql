@@ -65,7 +65,7 @@ const getBookByCategoryId = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Successfully Delete Single Book data',
+    message: 'Successfully Retrieve Single Book data using category id',
     data: result,
   });
 });
